@@ -1,0 +1,185 @@
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+</head>
+
+
+
+<div >Current Exposure Green vs. Brown</div>
+
+<hr>
+
+  <div class="d3chart" style="display: grid; grid-template-columns: auto auto; width: 750px">
+<div>Equity</div>
+  <div>Bonds</div>
+<div id="greenbrown_bubble_equity" class="d3chart"></div>
+<div id="greenbrown_bubble_bonds" class="d3chart"></div>
+
+</div>
+<hr>
+<div >Alignment vs. Current Exposure</div>
+<hr>
+<div class="d3chart" style="display: grid; grid-template-columns: auto auto; width: 750px">
+  <div>Equity</div>
+  <div>Bonds</div>
+  <div id="portfolio_bubble_equity" class="d3chart"></div>
+  <div id="portfolio_bubble_bonds" class="d3chart"></div>
+</div>
+
+
+
+<hr>
+<div class="d3chart" style="display: grid; grid-template-columns: auto auto; width: 750px">
+  <div>Equity</div>
+  <div>Bonds</div>
+  <div id="portfolio_bubble_equity_2" class="d3chart"></div>
+  <div id="portfolio_bubble_bonds_2" class="d3chart"></div>
+</div>
+<hr>
+
+<div class="d3chart" style="display: grid; grid-template-columns: auto auto; width: 750px">
+  <div>Equity</div>
+  <div>Bonds</div>
+  <div id="company_bubble_equity" class="d3chart"></div>
+  <div id="company_bubble_bonds" class="d3chart"></div>
+</div>
+<hr>
+
+
+<div id="company_bubble" class="d3chart"></div>
+
+
+
+<script src="js/d3.v4.min.js"></script>
+<link rel="stylesheet" href="css/d3chart.css">
+<script src="js/bubble2.js"></script>
+
+
+
+<script>
+  window.addEventListener('load', (event) => {
+    
+    if (typeof data_greenbrown_bubble_equity != "undefined" && data_greenbrown_bubble.length > 0) {
+      window.greenbrown_bubble = new bubble2("div[id='greenbrown_bubble_equity']", data_greenbrown_bubble_equity, {
+        bkg_fill: false, 
+        xtitle: "share of low-carbon technologies", 
+        ytitle: "share of high-carbon technologies",
+		zvar: "z",
+		vvar: "v",
+		color_: "color_",
+        xticksfrmt: ".1%"
+      });
+    }
+	
+	if (typeof data_greenbrown_bubble_bonds != "undefined" && data_greenbrown_bubble.length > 0) {
+      window.greenbrown_bubble = new bubble2("div[id='greenbrown_bubble_bonds']", data_greenbrown_bubble_bonds, {
+        bkg_fill: false, 
+        xtitle: "share of low-carbon technologies", 
+        ytitle: "share of high-carbon technologies",
+		zvar: "z",
+		vvar: "v",
+		color_: "color_",
+        xticksfrmt: ".1%"
+      });
+    }
+    
+    if (typeof data_portfolio_bubble_equity != "undefined" && data_portfolio_bubble_equity.length > 0) {
+      window.portfolio_bubble_equity = new bubble2("div[id='portfolio_bubble_equity']", data_portfolio_bubble_equity, {
+          bkg_fill: true,
+          xvar: "plan_tech_share",
+          yvar: "y",
+		  zvar: "z",
+		  vvar: "v",
+		  color_: "color_",
+          filter: "ald_sector",
+          xtitle: "Current Exposure to green/brown or ratio green/(green+brown)",
+          ytitle: "Alignment Single Indicatotor: high = aligned, low = not aligned",yintcpt: true,
+          xticksfrmt: ".1%"
+        });
+    }
+
+    if (typeof data_portfolio_bubble_bonds != "undefined" && data_portfolio_bubble_bonds.length > 0) {
+      window.portfolio_bubble_bonds = new bubble2("div[id='portfolio_bubble_bonds']", data_portfolio_bubble_bonds, {
+          bkg_fill: true,
+          xvar: "plan_tech_share",
+          yvar: "y",
+		  zvar: "z",
+		  vvar: "v",
+		  color_: "color_",
+          filter: "ald_sector",
+          xtitle: "Current Exposure to green/brown or ratio green/(green+brown)",
+          ytitle: "Alignment Single Indicatotor: high = aligned, low = not aligned",yintcpt: true,
+        xticksfrmt: ".1%"
+        });
+    }
+    if (typeof data_portfolio_bubble_equity_2 != "undefined" && data_portfolio_bubble_equity_2.length > 0) {
+      window.portfolio_bubble_equity_2 = new bubble2("div[id='portfolio_bubble_equity_2']", data_portfolio_bubble_equity_2, {
+          bkg_fill: true,
+          xvar: "plan_tech_share",
+          yvar: "y",
+		  zvar: "z",
+		  color_: "color_",
+          filter: "ald_sector",
+          xtitle: "Current Exposure to green/brown or ratio green/(green+brown)(as defined in R-script",
+          ytitle: "Alignment Single Indicatotor: high = aligned, low = not aligned"
+        });
+    }
+
+    if (typeof data_portfolio_bubble_bonds_2 != "undefined" && data_portfolio_bubble_bonds_2.length > 0) {
+      window.portfolio_bubble_bonds_2 = new bubble2("div[id='portfolio_bubble_bonds_2']", data_portfolio_bubble_bonds, {
+          bkg_fill: true,
+          xvar: "plan_tech_share",
+          yvar: "y",
+		  color_: "color_",
+          filter: "ald_sector",
+          xtitle: "Current Exposure to green/brown or ratio green/(green+brown)(as defined in R-script)",
+          ytitle: "Alignment Single Indicatotor: high = aligned, low = not aligned"
+        });
+    }
+    if (typeof data_company_bubble_equity != "undefined" && data_company_bubble_equity.length > 0) {
+      window.company_bubble_equity = new bubble2("div[id='company_bubble_equity']", data_company_bubble_equity, {
+          bkg_fill: true,
+          namevar: "company_name",
+          xvar: "plan_tech_share",
+          yvar: "y",
+		  color_: "color_",
+          filter: "ald_sector",
+          xtitle: "% of the Company Capacity in Low Carbon Technology",
+          ytitle: "% of New Capacity in Low Carbon Technology",
+          xintcpt: true,
+          yintcpt: true
+        });
+    }
+
+    if (typeof data_company_bubble_bonds != "undefined" && data_company_bubble_bonds.length > 0) {
+      window.company_bubble_bonds = new bubble2("div[id='company_bubble_bonds']", data_company_bubble_bonds, {
+          bkg_fill: true,
+          namevar: "company_name",
+          xvar: "plan_tech_share",
+          yvar: "y",
+		  color_: "color_",
+          filter: "ald_sector",
+          xtitle: "% of the Company Capacity in Low Carbon Technology",
+          ytitle: "% of New Capacity in Low Carbon Technology",
+          xintcpt: true,
+          yintcpt: true
+        });
+    }
+    
+  });
+</script>
+
+
+
+
+<script src="data/data_greenbrown_bubble.js"></script>
+
+<script src="data/data_greenbrown_bubble_equity.js"></script>
+<script src="data/data_greenbrown_bubble_bonds.js"></script>
+
+
+<script src="data/data_portfolio_bubble_equity.js"></script>
+<script src="data/data_portfolio_bubble_bonds.js"></script>
+
+<script src="data/data_company_bubble_equity.js"></script>
+<script src="data/data_company_bubble_bonds.js"></script>

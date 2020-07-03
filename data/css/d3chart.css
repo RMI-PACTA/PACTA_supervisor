@@ -1,0 +1,69 @@
+div.d3chart {
+  font-family: sans-serif;
+  font-size: 0.9em;
+  width: 100%;
+}
+
+div.d3chart > * {
+  display: block;
+  margin: 0 auto;
+}
+
+div.d3chart div.d3tooltip {
+  opacity: 0.9;
+  background-color: white;
+  color: black;
+  border-radius: 4px;
+  padding: 10px;
+  border: 1px solid;
+  font-family: sans-serif;
+  /* position: absolute; */
+  position: fixed; /* position must be fixed to work in Gitbook */
+}
+
+div.d3chart#taxonomy_pie {
+  font-size: 0.6em;
+}
+
+div.d3chart.PieExploded {
+  font-size: 0.7em;
+}
+
+div.d3chart.WaffleChart {
+  font-size: 1.4em;
+}
+
+div.d3chart.stacked_bars .axis .domain {
+  display: none;
+}
+
+/* d3 data_table styling */
+
+div.d3chart.data_table table,
+div.d3chart.data_table th,
+div.d3chart.data_table td {
+  border-collapse: collapse;
+  padding: 8px;
+  border-bottom: 1px solid #aaa;
+  text-align: center;
+}
+
+div.d3chart.data_table table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.beta_label {
+  color: black;
+  font-weight: bold;
+  -webkit-text-fill-color: black; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 0.8px;
+  -webkit-text-stroke-color: white;
+  font-size: 24px;
+  transform: rotate(-45deg);
+  position: relative;
+  z-index: 999;
+  top: 200px;
+  left: 100px;
+  text-align: center;
+  width: 750px;
+}
